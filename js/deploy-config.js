@@ -1,0 +1,1 @@
+window.MAGESHVANI_API_BASE_URL = '';

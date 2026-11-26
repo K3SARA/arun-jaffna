@@ -1,0 +1,1203 @@
+<!doctype html>
+<html lang="ta">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>மகேஸ்வானி வெற்றிலை - Mageshvani Vetrilai</title>
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="மகேஸ்வானி வெற்றிலை" />
+
+    <link rel="manifest" href="./manifest.json?v=116" />
+    <link rel="icon" href="./icons/logo.png" />
+    <link rel="apple-touch-icon" href="./icons/logo.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/variables.css?v=116" />
+    <link rel="stylesheet" href="css/base.css?v=116" />
+    <link rel="stylesheet" href="css/components.css?v=116" />
+    <link rel="stylesheet" href="css/pages.css?v=116" />
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=116" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Login Page -->
+      <div id="login-page" class="page">
+        <div class="login-lang-wrap">
+          <button type="button" class="lang-toggle-btn" onclick="i18n.toggleLanguage()" title="Switch Language">
+            <span class="lang-icon">🌐</span>
+            <span class="lang-pill active">தமிழ்</span>
+            <span class="lang-divider">/</span>
+            <span class="lang-pill">English</span>
+          </button>
+        </div>
+        <div class="logo-container">
+          <img src="icons/logo.png" alt="மகேஸ்வானி வெற்றிலை Logo" class="logo" />
+          <h1 class="shop-brand-name">மகேஸ்வானி வெற்றிலை</h1>
+          <p class="shop-brand-address" style="color: var(--text-muted); margin-top: 8px">
+            மகேஸ்வானி வெற்றிலை<br />
+            பருத்தித்துறை வீதி, நெல்லியடி<br />
+            076 10 30000 / 076 63 00004
+          </p>
+        </div>
+        <div
+          class="card"
+          style="width: 100%; max-width: 400px; text-align: left"
+        >
+          <h2 id="login-title" data-i18n="loginTitle" style="margin-bottom: 16px">உள்நுழைவு / அமைப்பு</h2>
+          <div class="input-group">
+            <label data-i18n="username">பயனர்பெயர்</label>
+            <input
+              type="text"
+              id="auth-user"
+              class="input-field"
+              data-i18n-placeholder="usernamePlaceholder"
+              placeholder="பயனர்பெயரை உள்ளிடவும்"
+              autocomplete="username"
+            />
+          </div>
+          <div class="input-group">
+            <label data-i18n="password">கடவுச்சொல்</label>
+            <input
+              type="password"
+              id="auth-pass"
+              class="input-field"
+              data-i18n-placeholder="passwordPlaceholder"
+              placeholder="கடவுச்சொல்லை உள்ளிடவும்"
+              autocomplete="current-password"
+            />
+          </div>
+          <button
+            id="btn-login"
+            class="btn-primary"
+            data-i18n="btnLogin"
+            style="margin-top: 24px; width: 100%"
+          >
+            தொடரவும்
+          </button>
+          <button
+            id="btn-reset-login"
+            data-i18n="btnResetLogin"
+            style="
+              margin-top: 10px;
+              width: 100%;
+              color: var(--text-muted);
+              font-size: 0.9rem;
+            "
+          >
+            கடவுச்சொல் மறந்துவிட்டதா? / உள்நுழைவை மீட்டமைக்கவும்
+          </button>
+        </div>
+      </div>
+
+      <!-- Billing Page -->
+      <div id="billing-page" class="page">
+        <header class="top-header">
+          <h1>
+            <img src="icons/logo.png" alt="Logo" class="logo" />
+            <span class="shop-brand-name">மகேஸ்வானி வெற்றிலை</span>
+          </h1>
+          <div class="header-actions">
+            <button type="button" class="lang-toggle-btn" onclick="i18n.toggleLanguage()" title="Switch Language">
+              <span class="lang-icon">🌐</span>
+              <span class="lang-pill active">தமிழ்</span>
+              <span class="lang-divider">/</span>
+              <span class="lang-pill">English</span>
+            </button>
+            <button id="btn-quick-backup" class="header-tool-btn" data-i18n="backup">
+              காப்புப்பிரதி
+            </button>
+            <button
+              class="icon-btn logout-btn"
+              onclick="app.logout()"
+              data-i18n="logout"
+              title="வெளியேறு"
+            >
+              வெளியேறு
+            </button>
+          </div>
+        </header>
+
+        <div
+          style="
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: calc(140px + env(safe-area-inset-bottom));
+          "
+        >
+          <div id="backup-reminder" class="backup-reminder hidden">
+            <div>
+              <strong data-i18n="backupReminderTitle">காப்புப்பிரதி பரிந்துரைக்கப்படுகிறது</strong>
+              <span id="backup-reminder-text" data-i18n="backupReminderText"
+                >உங்கள் தரவைப் பாதுகாக்க காப்புப்பிரதி எடுக்கவும்.</span
+              >
+            </div>
+            <button id="btn-reminder-backup" data-i18n="backupNow">இப்போதே எடுக்கவும்</button>
+          </div>
+
+          <!-- Customer Section -->
+          <div class="card">
+            <div class="input-group">
+              <label data-i18n="customerName">வாடிக்கையாளர் பெயர்</label>
+              <input
+                type="text"
+                id="customer-name"
+                class="input-field"
+                data-i18n-placeholder="customerNamePlaceholder"
+                placeholder="நேரடி வாடிக்கையாளர்"
+              />
+              <div id="customer-autocomplete" class="customer-dropdown"></div>
+              <div
+                id="customer-outstanding"
+                style="
+                  display: none;
+                  margin-top: 6px;
+                  font-size: 0.85rem;
+                  color: #d70015;
+                  font-weight: 600;
+                "
+              ></div>
+            </div>
+            <div class="input-group">
+              <label data-i18n="phoneOptional">தொலைபேசி எண் (விருப்பத்தேர்வு)</label>
+              <input
+                type="tel"
+                id="customer-phone"
+                class="input-field"
+                data-i18n-placeholder="phonePlaceholder"
+                placeholder="07XXXXXXXX"
+              />
+            </div>
+            <div class="input-group" style="margin-bottom: 0">
+              <label data-i18n="addressOptional">வாடிக்கையாளர் முகவரி (விருப்பத்தேர்வு)</label>
+              <input
+                type="text"
+                id="customer-address"
+                class="input-field"
+                data-i18n-placeholder="addressPlaceholder"
+                placeholder="முகவரியை உள்ளிடவும்"
+              />
+            </div>
+          </div>
+
+          <!-- Products List -->
+          <div id="bill-items-container">
+            <!-- Items injected via JS -->
+          </div>
+
+          <div style="text-align: center; margin: 0 20px">
+            <button
+              id="btn-add-item"
+              data-i18n="btnAddItem"
+              style="
+                color: var(--accent-color);
+                font-weight: 500;
+                font-size: 1rem;
+                padding: 12px;
+              "
+            >
+              + மற்றொரு பொருள் சேர்க்க
+            </button>
+          </div>
+
+          <!-- Price Summary -->
+          <div class="summary-card">
+            <div class="summary-row">
+              <span data-i18n="subtotal">துணை மொத்தம்</span>
+              <span id="label-subtotal">LKR 0</span>
+            </div>
+            <div class="summary-row total">
+              <span data-i18n="total">மொத்தம்</span>
+              <span id="label-total">LKR 0</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="input-group">
+              <label data-i18n="paymentMethod">கட்டண முறை</label>
+              <select id="payment-method" class="input-field">
+                <option value="cash">பணம் (Cash)</option>
+                <option value="card">அட்டை (Card)</option>
+                <option value="bank">வங்கி பரிமாற்றம் (Bank)</option>
+                <option value="cheque">காசோலை (Cheque)</option>
+                <option value="credit">கடன் (Credit)</option>
+              </select>
+            </div>
+            <div id="cheque-details" class="cheque-details hidden">
+              <div class="input-group">
+                <label data-i18n="chequeAmount">காசோலை தொகை</label>
+                <input
+                  type="number"
+                  id="cheque-amount"
+                  class="input-field"
+                  placeholder="0"
+                  step="0.01"
+                />
+              </div>
+              <div class="input-group">
+                <label data-i18n="chequeDate">காசோலை தேதி</label>
+                <input type="date" id="cheque-date" class="input-field" />
+              </div>
+              <div class="input-group">
+                <label data-i18n="chequeNumber">காசோலை எண்</label>
+                <input
+                  type="text"
+                  id="cheque-number"
+                  class="input-field"
+                  data-i18n-placeholder="chequeNumberPlaceholder"
+                  placeholder="காசோலை எண்ணை உள்ளிடவும்"
+                />
+              </div>
+              <div class="input-group" style="margin-bottom: 0">
+                <label data-i18n="bankName">வங்கி</label>
+                <input
+                  type="text"
+                  id="cheque-bank"
+                  class="input-field"
+                  data-i18n-placeholder="bankNamePlaceholder"
+                  placeholder="வங்கியின் பெயரை உள்ளிடவும்"
+                />
+              </div>
+            </div>
+            <div class="input-group">
+              <label data-i18n="receivedAmount">பெற்ற தொகை</label>
+              <input
+                type="number"
+                id="received-amount"
+                class="input-field"
+                placeholder="0"
+                step="0.01"
+              />
+            </div>
+            <button
+              type="button"
+              id="btn-add-payment-method"
+              class="btn-tool split-payment-add"
+              data-i18n="btnAddPaymentMethod"
+            >
+              + கட்டண முறை சேர்க்க
+            </button>
+            <div id="split-payments" class="split-payments hidden">
+              <div class="split-payments-head">
+                <span data-i18n="paymentMethod">கட்டண முறைகள்</span>
+                <button type="button" id="btn-clear-split-payments" data-i18n="useSinglePayment">
+                  ஒற்றை கட்டண முறை
+                </button>
+              </div>
+              <div id="split-payments-list"></div>
+            </div>
+            <div
+              class="summary-row total"
+              style="margin-top: 0; padding-top: 10px"
+            >
+              <span data-i18n="balance">மீதி / நிலுவை</span>
+              <span id="label-balance">LKR 0</span>
+            </div>
+            <div class="summary-row" style="margin-bottom: 0">
+              <span data-i18n="change">சில்லறை</span>
+              <span id="label-change" style="display: none">LKR 0</span>
+            </div>
+          </div>
+
+          <button id="btn-generate-bill" class="btn-primary" data-i18n="btnGenerateBill">
+            பில் உருவாக்கு & பகிர்க
+          </button>
+          <button id="btn-cancel-edit" class="btn-secondary hidden" data-i18n="btnCancelEdit">
+            பில் திருத்துவதை ரத்து செய்
+          </button>
+        </div>
+      </div>
+
+      <!-- History Page -->
+      <div id="history-page" class="page">
+        <header class="top-header">
+          <button
+            class="icon-btn logout-btn"
+            onclick="app.logout()"
+            data-i18n="logout"
+            title="வெளியேறு"
+          >
+            வெளியேறு
+          </button>
+          <h1 data-i18n="billHistory">பில் வரலாறு</h1>
+          <div class="header-actions">
+            <button type="button" class="lang-toggle-btn" onclick="i18n.toggleLanguage()" title="Switch Language">
+              <span class="lang-icon">🌐</span>
+              <span class="lang-pill active">தமிழ்</span>
+              <span class="lang-divider">/</span>
+              <span class="lang-pill">English</span>
+            </button>
+          </div>
+        </header>
+        <div
+          style="
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: calc(140px + env(safe-area-inset-bottom));
+          "
+        >
+          <div class="card history-filters">
+            <div class="input-group" style="margin-bottom: 12px">
+              <label data-i18n="searchCustomer">வாடிக்கையாளரைத் தேடு</label>
+              <input
+                type="text"
+                id="history-search"
+                class="input-field"
+                data-i18n-placeholder="searchCustomerPlaceholder"
+                placeholder="வாடிக்கையாளர் பெயரை உள்ளிடவும்"
+              />
+            </div>
+            <div class="history-filter-dates">
+              <div class="input-group" style="margin-bottom: 0">
+                <label data-i18n="from">முதல்</label>
+                <input type="date" id="history-date-from" class="input-field" />
+              </div>
+              <div class="input-group" style="margin-bottom: 0">
+                <label data-i18n="to">வரை</label>
+                <input type="date" id="history-date-to" class="input-field" />
+              </div>
+            </div>
+            <div class="history-tools">
+              <button id="btn-export-backup" class="btn-tool" data-i18n="exportBackup">
+                காப்புப்பிரதி ஏற்றுமதி
+              </button>
+              <button id="btn-import-backup" class="btn-tool" data-i18n="importBackup">
+                காப்புப்பிரதி இறக்குமதி
+              </button>
+              <button id="btn-rollback-import" class="btn-tool" data-i18n="rollbackImport">
+                மீட்டமைக்கவும்
+              </button>
+              <input
+                type="file"
+                id="backup-import-file"
+                accept="application/json"
+                style="display: none"
+              />
+            </div>
+          </div>
+          <div id="history-list" style="padding-bottom: 24px">
+            <!-- Bills injected via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Customers Page -->
+      <div id="customers-page" class="page">
+        <header class="top-header">
+          <button
+            class="icon-btn logout-btn"
+            onclick="app.logout()"
+            data-i18n="logout"
+            title="வெளியேறு"
+          >
+            வெளியேறு
+          </button>
+          <h1 data-i18n="customers">வாடிக்கையாளர்கள்</h1>
+          <div class="header-actions">
+            <button type="button" class="lang-toggle-btn" onclick="i18n.toggleLanguage()" title="Switch Language">
+              <span class="lang-icon">🌐</span>
+              <span class="lang-pill active">தமிழ்</span>
+              <span class="lang-divider">/</span>
+              <span class="lang-pill">English</span>
+            </button>
+          </div>
+        </header>
+        <div
+          style="
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: calc(140px + env(safe-area-inset-bottom));
+          "
+        >
+          <div class="card history-filters">
+            <div class="input-group" style="margin-bottom: 0">
+              <label data-i18n="searchCustomer">வாடிக்கையாளரைத் தேடு</label>
+              <input
+                type="text"
+                id="customers-search"
+                class="input-field"
+                data-i18n-placeholder="searchCustomerPlaceholder"
+                placeholder="வாடிக்கையாளர் பெயரை உள்ளிடவும்"
+              />
+            </div>
+            <button id="btn-add-customer" class="btn-tool customers-add-btn" data-i18n="btnAddNewCustomer">
+              புதிய வாடிக்கையாளர் சேர்க்க
+            </button>
+            <label class="btn-tool customers-import-btn" for="customers-import-file" data-i18n="importCustomers">வாடிக்கையாளர்களை இறக்குமதி</label>
+            <input id="customers-import-file" type="file" accept=".csv,text/csv" hidden />
+            <small data-i18n="customerCsvHint">CSV: name, phone, address</small>
+          </div>
+          <div id="customers-list" style="padding-bottom: 24px">
+            <!-- Customers injected via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Collection Page -->
+      <div id="collection-page" class="page">
+        <header class="top-header">
+          <button
+            class="icon-btn logout-btn"
+            onclick="app.logout()"
+            data-i18n="logout"
+            title="வெளியேறு"
+          >
+            வெளியேறு
+          </button>
+          <h1 data-i18n="collection">வசூல்</h1>
+          <div class="header-actions">
+            <button type="button" class="lang-toggle-btn" onclick="i18n.toggleLanguage()" title="Switch Language">
+              <span class="lang-icon">🌐</span>
+              <span class="lang-pill active">தமிழ்</span>
+              <span class="lang-divider">/</span>
+              <span class="lang-pill">English</span>
+            </button>
+          </div>
+        </header>
+        <div
+          style="
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: calc(140px + env(safe-area-inset-bottom));
+          "
+        >
+          <div class="card history-filters">
+            <div class="input-group" style="margin-bottom: 0">
+              <label data-i18n="searchCustomer">வாடிக்கையாளரைத் தேடு</label>
+              <input
+                type="text"
+                id="collection-search"
+                class="input-field"
+                data-i18n-placeholder="searchCustomerPlaceholder"
+                placeholder="வாடிக்கையாளர் பெயரை உள்ளிடவும்"
+              />
+            </div>
+          </div>
+          <div id="collection-list" style="padding-bottom: 24px">
+            <!-- Collection injected via JS -->
+          </div>
+          <div class="card">
+            <h3
+              data-i18n="collectionAuditTrail"
+              style="
+                font-size: 0.95rem;
+                margin-bottom: 10px;
+                color: var(--text-main);
+              "
+            >
+              வசூல் தணிக்கைப் பதிவு
+            </h3>
+            <div id="collection-audit-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expenses Page -->
+      <div id="expenses-page" class="page">
+        <header class="top-header">
+          <button
+            class="icon-btn logout-btn"
+            onclick="app.logout()"
+            data-i18n="logout"
+            title="வெளியேறு"
+          >
+            வெளியேறு
+          </button>
+          <h1 data-i18n="expenses">செலவுகள்</h1>
+          <div class="header-actions">
+            <button type="button" class="lang-toggle-btn" onclick="i18n.toggleLanguage()" title="Switch Language">
+              <span class="lang-icon">🌐</span>
+              <span class="lang-pill active">தமிழ்</span>
+              <span class="lang-divider">/</span>
+              <span class="lang-pill">English</span>
+            </button>
+          </div>
+        </header>
+        <div class="expenses-scroll">
+          <div class="card">
+            <div class="input-group">
+              <label data-i18n="expenseName">செலவு பெயர்</label>
+              <input
+                type="text"
+                id="expense-name"
+                class="input-field"
+                list="expense-name-options"
+                data-i18n-placeholder="expenseNamePlaceholder"
+                placeholder="எ.கா. போக்குவரத்து, பொதி செய்தல், சம்பளம்"
+              />
+              <datalist id="expense-name-options">
+                <option value="கொள்முதல்"></option>
+                <option value="விற்பனை"></option>
+                <option value="எரிபொருள் / பெட்ரோல்"></option>
+                <option value="போக்குவரத்து"></option>
+                <option value="பணியாளர் சம்பளம்"></option>
+                <option value="பொதி செய்தல்"></option>
+                <option value="விளம்பரம்"></option>
+                <option value="காலாவதி / சேதம்"></option>
+                <option value="மின்சாரக் கட்டணம்"></option>
+                <option value="தண்ணீர்க் கட்டணம்"></option>
+                <option value="வாகன பராமரிப்பு"></option>
+                <option value="வாடகை"></option>
+                <option value="இதர செலவுகள்"></option>
+                <option value="தொலைபேசி கட்டணம்"></option>
+                <option value="உபகரணங்கள்"></option>
+              </datalist>
+            </div>
+            <div class="input-group">
+              <label data-i18n="amount">தொகை</label>
+              <input
+                type="number"
+                id="expense-amount"
+                class="input-field"
+                placeholder="0"
+                step="0.01"
+              />
+            </div>
+            <div class="input-group">
+              <label data-i18n="category">வகை</label>
+              <select id="expense-category" class="input-field">
+                <option value="Transport">போக்குவரத்து (Transport)</option>
+                <option value="Salary">சம்பளம் (Salary)</option>
+                <option value="Packing">பொதி செய்தல் (Packing)</option>
+                <option value="Rent">வாடகை (Rent)</option>
+                <option value="Utility">பயன்பாடுகள் (Utility)</option>
+                <option value="Other">மற்றவை (Other)</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label data-i18n="date">தேதி</label>
+              <input type="date" id="expense-date" class="input-field" />
+            </div>
+            <div class="input-group" style="margin-bottom: 0">
+              <label data-i18n="noteOptional">குறிப்பு (விருப்பத்தேர்வு)</label>
+              <input
+                type="text"
+                id="expense-note"
+                class="input-field"
+                data-i18n-placeholder="shortNotePlaceholder"
+                placeholder="சிறு குறிப்பு"
+              />
+            </div>
+            <input type="hidden" id="expense-edit-id" />
+            <button
+              id="btn-add-expense"
+              class="btn-primary"
+              data-i18n="btnAddExpense"
+              style="margin: 16px 0 0 0; width: 100%"
+            >
+              செலவைச் சேர்க்கவும்
+            </button>
+            <button
+              id="btn-cancel-expense-edit"
+              class="btn-secondary hidden"
+              data-i18n="btnCancelExpenseEdit"
+              style="margin: 10px 0 0 0; width: 100%"
+            >
+              திருத்துவதை ரத்து செய்
+            </button>
+          </div>
+
+          <div class="card expenses-filter-card">
+            <div class="expenses-filter-head">
+              <span data-i18n="filterByDate">தேதி வாரியாக வடிகட்டவும்</span>
+              <button
+                id="btn-clear-expense-filter"
+                class="expense-filter-clear"
+                data-i18n="clear"
+              >
+                தெளிவுபடுத்து
+              </button>
+            </div>
+            <div class="expenses-filter-dates">
+              <div class="input-group" style="margin-bottom: 0">
+                <label data-i18n="from">முதல்</label>
+                <input type="date" id="expense-date-from" class="input-field" />
+              </div>
+              <div class="input-group" style="margin-bottom: 0">
+                <label data-i18n="to">வரை</label>
+                <input type="date" id="expense-date-to" class="input-field" />
+              </div>
+            </div>
+          </div>
+
+          <div class="expenses-title-row">
+            <h3 data-i18n="recentExpenses">சமீபத்திய செலவுகள்</h3>
+            <div class="expenses-title-actions">
+              <button
+                id="btn-print-expenses"
+                class="btn-tool"
+                onclick="expensesPage.printExpenses()"
+                data-i18n="print"
+              >
+                அச்சிடு
+              </button>
+              <span id="expenses-total" class="expenses-total-badge"
+                >LKR 0</span
+              >
+            </div>
+          </div>
+          <div id="expenses-list" style="padding-bottom: 24px">
+            <!-- Expenses injected via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Reports Page -->
+      <div id="reports-page" class="page">
+        <header class="top-header">
+          <button
+            class="icon-btn logout-btn"
+            onclick="app.logout()"
+            data-i18n="logout"
+            title="வெளியேறு"
+          >
+            வெளியேறு
+          </button>
+          <h1 data-i18n="reports">அறிக்கைகள்</h1>
+          <div class="header-actions">
+            <button type="button" class="lang-toggle-btn" onclick="i18n.toggleLanguage()" title="Switch Language">
+              <span class="lang-icon">🌐</span>
+              <span class="lang-pill active">தமிழ்</span>
+              <span class="lang-divider">/</span>
+              <span class="lang-pill">English</span>
+            </button>
+          </div>
+        </header>
+        <div class="reports-shell">
+          <div class="card reports-controls">
+            <div class="reports-controls-grid">
+              <div class="input-group" style="margin-bottom: 0">
+                <label data-i18n="reportType">அறிக்கை</label>
+                <select id="reports-type" class="input-field">
+                  <option value="sales">விற்பனை சுருக்கம் (Sales Summary)</option>
+                  <option value="profit">நிகர லாபம் (Net Profit)</option>
+                  <option value="receivables">நிலுவைத் தொகை (Outstanding)</option>
+                  <option value="collections">வசூல் அறிக்கை (Collections)</option>
+                  <option value="products">அதிக விற்பனையான பொருட்கள் (Top Products)</option>
+                  <option value="stock">சரக்கு இருப்பு மதிப்பு (Stock Valuation)</option>
+                  <option value="payments">கட்டண முறைகள் (Payment Methods)</option>
+                  <option value="cheques">காசோலை விவரங்கள் (Cheque Details)</option>
+                  <option value="expenses">செலவு சுருக்கம் (Expense Summary)</option>
+                  <option value="dayclose">நாள் முடிவு அறிக்கை (Day Close)</option>
+                  <option value="lowstock">குறைந்த இருப்பு எச்சரிக்கை (Low Stock)</option>
+                  <option value="auditlog">தணிக்கைப் பதிவு (Audit Log)</option>
+                  <option value="customers">வாடிக்கையாளர் சுருக்கம் (Customer Summary)</option>
+                  <option value="audit">தரவு தணிக்கை (Data Audit)</option>
+                </select>
+              </div>
+              <div class="input-group" style="margin-bottom: 0">
+                <label data-i18n="period">காலம்</label>
+                <select id="reports-period" class="input-field">
+                  <option value="today">இன்று (Today)</option>
+                  <option value="this_month">இந்த மாதம் (This Month)</option>
+                  <option value="all">அனைத்து காலம் (All Time)</option>
+                  <option value="custom">குறிப்பிட்ட காலம் (Custom Range)</option>
+                </select>
+              </div>
+            </div>
+            <div
+              id="reports-custom-dates"
+              class="reports-controls-grid hidden"
+              style="margin-top: 10px"
+            >
+              <div class="input-group" style="margin-bottom: 0">
+                <label data-i18n="from">முதல்</label>
+                <input type="date" id="reports-date-from" class="input-field" />
+              </div>
+              <div class="input-group" style="margin-bottom: 0">
+                <label data-i18n="to">வரை</label>
+                <input type="date" id="reports-date-to" class="input-field" />
+              </div>
+            </div>
+          </div>
+          <div class="card reports-controls">
+            <div class="input-group" style="margin-bottom: 10px">
+              <label data-i18n="quickNotes">விரைவுக் குறிப்புகள்</label>
+              <textarea
+                id="reports-quick-note"
+                class="input-field"
+                rows="4"
+                data-i18n-placeholder="quickNotesPlaceholder"
+                placeholder="இங்கு குறிப்புகளை எழுதவும்..."
+              ></textarea>
+            </div>
+            <div
+              style="
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <div
+                id="reports-note-status"
+                class="history-date"
+                data-i18n="notSavedYet"
+                style="margin: 0"
+              >
+                இன்னும் சேமிக்கப்படவில்லை
+              </div>
+              <div style="display: flex; gap: 8px">
+                <button id="reports-note-clear" class="btn-tool" type="button" data-i18n="clear">
+                  தெளிவுபடுத்து
+                </button>
+                <button id="reports-note-save" class="btn-tool" type="button" data-i18n="saveNote">
+                  குறிப்பைச் சேமி
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="reports-view" class="card reports-view"></div>
+        </div>
+      </div>
+
+      <!-- Inventory Page -->
+      <div id="inventory-page" class="page">
+        <header class="top-header">
+          <button
+            class="icon-btn logout-btn"
+            onclick="app.logout()"
+            data-i18n="logout"
+            title="வெளியேறு"
+          >
+            வெளியேறு
+          </button>
+          <h1 data-i18n="inventory">சரக்கு இருப்பு</h1>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button type="button" class="lang-toggle-btn" onclick="i18n.toggleLanguage()" title="Switch Language">
+              <span class="lang-icon">🌐</span>
+              <span class="lang-pill active">தமிழ்</span>
+              <span class="lang-divider">/</span>
+              <span class="lang-pill">English</span>
+            </button>
+            <button
+              id="btn-inventory-edit"
+              class="inventory-header-edit"
+              onclick="inventory.enableEditing()"
+              data-i18n="btnInventoryEdit"
+            >
+              திருத்து
+            </button>
+          </div>
+        </header>
+        <div class="inventory-scroll">
+          <div class="card">
+            <div class="input-group">
+              <label data-i18n="selectExistingProduct">இருக்கும் பொருளைத் தேர்ந்தெடுக்கவும்</label>
+              <select
+                id="inv-existing-product"
+                class="input-field"
+                onchange="inventory.selectExistingProduct(this.value)"
+              >
+                <option value="" data-i18n="chooseProductOption">புதிய பொருள் அல்லது ஏற்கனவே உள்ளதைத் தேர்ந்தெடுக்கவும்</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label data-i18n="addNewProduct">புதிய பொருள் சேர்க்க</label>
+              <input
+                type="text"
+                id="inv-new-name"
+                class="input-field"
+                data-i18n-placeholder="productNamePlaceholder"
+                placeholder="பொருளின் பெயர்"
+              />
+            </div>
+            <div class="input-group">
+              <label data-i18n="initialStock">ஆரம்ப இருப்பு (அளவு)</label>
+              <input
+                type="number"
+                id="inv-new-stock"
+                class="input-field"
+                placeholder="0"
+                step="0.01"
+              />
+            </div>
+            <div class="input-group">
+              <label data-i18n="sellingPrice">விற்பனை விலை</label>
+              <input
+                type="number"
+                id="inv-new-billing-price"
+                class="input-field"
+                placeholder="0"
+                step="0.01"
+              />
+            </div>
+            <div class="input-group">
+              <label data-i18n="purchasePrice">கொள்முதல் விலை</label>
+              <input
+                type="number"
+                id="inv-new-invoice-price"
+                class="input-field"
+                placeholder="0"
+                step="0.01"
+              />
+            </div>
+            <div class="input-group" style="margin-bottom: 0">
+              <label data-i18n="reorderLevel">மறுவரிசை எச்சரிக்கை அளவு</label>
+              <input
+                type="number"
+                id="inv-new-reorder-level"
+                class="input-field"
+                placeholder="5"
+                step="0.01"
+              />
+            </div>
+            <div class="input-group" style="margin-top: 16px; margin-bottom: 0">
+              <label data-i18n="changeReason">மாற்றக் காரணம்</label>
+              <input
+                type="text"
+                id="inv-change-reason"
+                class="input-field"
+                data-i18n-placeholder="changeReasonPlaceholder"
+                placeholder="மாற்றங்களைச் சேமிக்கும் போது காரணம் தேவை"
+              />
+            </div>
+          </div>
+
+          <div class="inventory-stock-title-row">
+            <h3 data-i18n="currentStock">தற்போதைய இருப்பு</h3>
+            <button
+              id="btn-inventory-pdf"
+              class="btn-tool"
+              onclick="inventory.printInventoryReport()"
+              data-i18n="btnDownloadPdf"
+            >
+              PDF பதிவிறக்கு
+            </button>
+          </div>
+          <div id="inventory-list">
+            <!-- Inventory injected via JS -->
+          </div>
+          <div class="inventory-stock-title-row">
+            <h3 data-i18n="archivedProducts">காப்பகப்படுத்தப்பட்ட பொருட்கள்</h3>
+          </div>
+          <div id="inventory-archived-list">
+            <!-- Archived inventory injected via JS -->
+          </div>
+        </div>
+        <button
+          id="btn-inventory-save"
+          class="inventory-floating-save hidden"
+          onclick="inventory.saveChanges()"
+          data-i18n="btnSaveInventory"
+        >
+          மாற்றங்களைச் சேமிக்கவும்
+        </button>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav class="nav-bottom hidden" id="nav-bottom">
+        <button
+          class="nav-item active"
+          id="nav-billing"
+          onclick="app.navigate('billing')"
+        >
+          <span class="nav-icon">&#129534;</span>
+          <span data-i18n="navBilling">பில்லிங்</span>
+        </button>
+        <button
+          class="nav-item"
+          id="nav-inventory"
+          onclick="app.navigate('inventory')"
+        >
+          <span class="nav-icon">&#128230;</span>
+          <span data-i18n="navInventory">சரக்கு இருப்பு</span>
+        </button>
+        <button
+          class="nav-item"
+          id="nav-customers"
+          onclick="app.navigate('customers')"
+        >
+          <span class="nav-icon">&#128101;</span>
+          <span data-i18n="navCustomers">வாடிக்கையாளர்கள்</span>
+        </button>
+        <button
+          class="nav-item"
+          id="nav-collection"
+          onclick="app.navigate('collection')"
+        >
+          <span class="nav-icon">&#128176;</span>
+          <span data-i18n="navCollection">வசூல்</span>
+        </button>
+        <button
+          class="nav-item"
+          id="nav-expenses"
+          onclick="app.navigate('expenses')"
+        >
+          <span class="nav-icon">&#128184;</span>
+          <span data-i18n="navExpenses">செலவுகள்</span>
+        </button>
+        <button
+          class="nav-item"
+          id="nav-reports"
+          onclick="app.navigate('reports')"
+        >
+          <span class="nav-icon">&#128200;</span>
+          <span data-i18n="navReports">அறிக்கைகள்</span>
+        </button>
+        <button
+          class="nav-item"
+          id="nav-history"
+          onclick="app.navigate('history')"
+        >
+          <span class="nav-icon">&#128220;</span>
+          <span data-i18n="navHistory">வரலாறு</span>
+        </button>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Switch to dark mode"
+        >
+          <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+          <span class="theme-toggle-text" data-i18n="darkMode">இருண்ட பயன்முறை</span>
+        </button>
+      </nav>
+
+      <!-- Modals -->
+      <div id="share-modal" class="modal-overlay">
+        <div class="modal-content">
+          <div class="modal-handle"></div>
+          <h2 data-i18n="billCreated" style="margin-bottom: 24px; text-align: center">பில் உருவாக்கப்பட்டது</h2>
+
+          <div style="display: flex; flex-direction: column; gap: 16px">
+            <label for="receipt-language" data-i18n="receiptLanguage">ரசீது மொழி</label>
+            <select id="receipt-language" class="input-field">
+              <option value="ta">தமிழ்</option>
+              <option value="en">English</option>
+              <option value="both">தமிழ் + English</option>
+            </select>
+            <button
+              class="btn-primary"
+              onclick="share.printReceipt()"
+              data-i18n="btnPrintReceipt"
+              style="margin: 0; background: #111; width: 100%"
+            >
+              ரசீது அச்சிடு (80mm)
+            </button>
+            <button
+              class="btn-primary"
+              onclick="share.viaWhatsApp()"
+              data-i18n="btnShareWhatsApp"
+              style="margin: 0; background: #25d366; width: 100%"
+            >
+              வாட்ஸ்அப் மூலம் பகிர்
+            </button>
+            <button
+              class="btn-primary"
+              onclick="share.viaSMS()"
+              data-i18n="btnSendSMS"
+              style="margin: 0; background: #007aff; width: 100%"
+            >
+              எஸ்எம்எஸ் அனுப்பு
+            </button>
+            <button
+              class="btn-primary"
+              onclick="share.copyText()"
+              data-i18n="btnCopyBillText"
+              style="margin: 0; background: #8e8e93; width: 100%"
+            >
+              பில் உரையை நகலெடு
+            </button>
+            <button
+              class="btn-primary"
+              onclick="app.closeModal('share-modal')"
+              data-i18n="btnDone"
+              style="
+                margin: 0;
+                background: none;
+                color: var(--text-main);
+                font-weight: 400;
+                width: 100%;
+              "
+            >
+              முடிந்தது
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="customer-edit-modal" class="modal-overlay">
+        <div class="modal-content">
+          <div class="modal-handle"></div>
+          <h2
+            id="customer-modal-title"
+            data-i18n="editCustomer"
+            style="margin-bottom: 20px; text-align: center"
+          >
+            வாடிக்கையாளரைத் திருத்து
+          </h2>
+          <div class="input-group">
+            <label data-i18n="name">பெயர்</label>
+            <input
+              type="text"
+              id="edit-customer-name"
+              class="input-field"
+              placeholder="வாடிக்கையாளர் பெயர்"
+            />
+          </div>
+          <div class="input-group">
+            <label data-i18n="phone">தொலைபேசி</label>
+            <input
+              type="tel"
+              id="edit-customer-phone"
+              class="input-field"
+              placeholder="07XXXXXXXX"
+            />
+          </div>
+          <div class="input-group" style="margin-bottom: 12px">
+            <label data-i18n="address">முகவரி</label>
+            <input
+              type="text"
+              id="edit-customer-address"
+              class="input-field"
+              placeholder="வாடிக்கையாளர் முகவரி"
+            />
+          </div>
+          <div class="customer-location-panel">
+            <div>
+              <strong data-i18n="mapLocation">வரைபட இடம்</strong>
+              <span id="customer-location-status" data-i18n="noLocationSaved">இடம் எதுவும் சேமிக்கப்படவில்லை</span>
+            </div>
+            <div class="customer-location-actions">
+              <button
+                id="btn-save-customer-location"
+                type="button"
+                class="btn-tool"
+                data-i18n="saveCurrentLocation"
+              >
+                தற்போதைய இடத்தைச் சேமி
+              </button>
+              <button
+                id="btn-set-customer-location-map"
+                type="button"
+                class="btn-tool"
+                data-i18n="setOnMap"
+              >
+                வரைபடத்தில் குறிக்கவும்
+              </button>
+              <button
+                id="btn-view-customer-location"
+                type="button"
+                class="btn-tool"
+                data-i18n="viewMap"
+              >
+                வரைபடம் பார்க்க
+              </button>
+              <button
+                id="btn-clear-customer-location"
+                type="button"
+                class="btn-tool danger"
+                data-i18n="clear"
+              >
+                அழி
+              </button>
+            </div>
+          </div>
+          <button
+            id="btn-save-customer-edit"
+            class="btn-primary"
+            data-i18n="btnSaveCustomerEdit"
+            style="margin: 0; width: 100%"
+          >
+            மாற்றங்களைச் சேமிக்கவும்
+          </button>
+          <button
+            class="btn-primary"
+            onclick="customersPage.closeEditModal()"
+            data-i18n="cancel"
+            style="
+              margin: 10px 0 0 0;
+              background: none;
+              color: var(--text-main);
+              font-weight: 400;
+              width: 100%;
+            "
+          >
+            ரத்து செய்
+          </button>
+        </div>
+      </div>
+
+      <div id="customer-map-modal" class="modal-overlay">
+        <div class="modal-content customer-map-modal-content">
+          <div class="modal-handle"></div>
+          <div class="customer-map-head">
+            <div>
+              <h2 id="customer-map-title">Customer Map</h2>
+              <p id="customer-map-subtitle"></p>
+            </div>
+            <button
+              class="btn-tool"
+              type="button"
+              onclick="customersPage.closeMapModal()"
+            >
+              Close
+            </button>
+          </div>
+          <div id="customer-map-tools" class="customer-map-tools hidden">
+            <div class="customer-map-search">
+              <input
+                id="customer-map-search-input"
+                class="input-field"
+                type="text"
+                placeholder="Search town, road, shop, or landmark"
+              />
+              <button id="btn-search-map-location" class="btn-tool" type="button">
+                Search
+              </button>
+            </div>
+            <div id="customer-map-search-results" class="customer-map-search-results"></div>
+            <div id="customer-map-instruction">
+              Tap the map to place the customer pin.
+            </div>
+            <button id="btn-save-manual-location" class="btn-tool" type="button">
+              Save Pin
+            </button>
+          </div>
+          <div id="customer-map"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="vendor/leaflet/leaflet.js?v=116"></script>
+    <script src="js/deploy-config.js?v=116"></script>
+    <script src="js/supabase-config.js?v=116"></script>
+    <script src="js/db.js?v=116"></script>
+    <script src="js/i18n.js?v=116"></script>
+    <script src="js/auth.js?v=116"></script>
+    <script src="js/billing.js?v=116"></script>
+    <script src="js/history.js?v=116"></script>
+    <script src="js/customers.js?v=116"></script>
+    <script src="js/collection.js?v=116"></script>
+    <script src="js/expenses.js?v=116"></script>
+    <script src="js/pdf.js?v=116"></script>
+    <script src="js/reports.js?v=116"></script>
+    <script src="js/inventory.js?v=116"></script>
+    <script src="js/share.js?v=116"></script>
+    <script src="js/clear-inputs.js?v=116"></script>
+    <script src="js/app.js?v=116"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./sw.js?v=116")
+            .then((reg) => {
+              console.log("SW registered:", reg.scope);
+            })
+            .catch((err) => {
+              console.log("SW reg failed:", err);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

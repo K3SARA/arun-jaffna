@@ -1,0 +1,614 @@
+{
+  "app": "Mageshvani Vetrilai",
+  "exportedAt": "2026-11-12T09:57:58.191Z",
+  "schemaVersion": 9,
+  "data": {
+    "products": [
+      {
+        "invoicePrice": 7,
+        "id": 1,
+        "updated_at": 1794380350994,
+        "name_en": "Betel leaf",
+        "stock": 100,
+        "inactive": false,
+        "reorderLevel": 20,
+        "name": "வெற்றிலை",
+        "created_at": 1794380350994,
+        "name_ta": "வெற்றிலை",
+        "billingPrice": 10,
+        "unit": "pcs"
+      },
+      {
+        "invoicePrice": 40,
+        "id": 2,
+        "updated_at": 1794380350994,
+        "name_en": "Tobacco",
+        "stock": 50,
+        "inactive": false,
+        "reorderLevel": 10,
+        "name": "புகையிலை",
+        "created_at": 1794380350994,
+        "name_ta": "புகையிலை",
+        "billingPrice": 50,
+        "unit": "pcs"
+      },
+      {
+        "invoicePrice": 130,
+        "id": 3,
+        "updated_at": 1794380350994,
+        "name_en": "Cigarettes",
+        "stock": 100,
+        "inactive": false,
+        "reorderLevel": 20,
+        "name": "சிகரெட்",
+        "created_at": 1794380350994,
+        "name_ta": "சிகரெட்",
+        "billingPrice": 150,
+        "unit": "pcs"
+      },
+      {
+        "invoicePrice": 20,
+        "id": 4,
+        "updated_at": 1794380350994,
+        "name_en": "Beedi",
+        "stock": 100,
+        "inactive": false,
+        "reorderLevel": 25,
+        "name": "பீடி",
+        "created_at": 1794380350994,
+        "name_ta": "பீடி",
+        "billingPrice": 25,
+        "unit": "pack"
+      },
+      {
+        "invoicePrice": 10,
+        "id": 5,
+        "updated_at": 1794380350994,
+        "name_en": "Buwak",
+        "stock": 100,
+        "inactive": false,
+        "reorderLevel": 20,
+        "name": "பூவாக்",
+        "created_at": 1794380350994,
+        "name_ta": "பூவாக்",
+        "billingPrice": 15,
+        "unit": "pcs"
+      },
+      {
+        "invoicePrice": 80,
+        "id": 6,
+        "updated_at": 1794380350994,
+        "name_en": "Soda",
+        "stock": 50,
+        "inactive": false,
+        "reorderLevel": 10,
+        "name": "சோடா",
+        "created_at": 1794380350994,
+        "name_ta": "சோடா",
+        "billingPrice": 100,
+        "unit": "pcs"
+      },
+      {
+        "invoicePrice": 100,
+        "id": 7,
+        "updated_at": 1794380350994,
+        "name_en": "Pepsi",
+        "stock": 50,
+        "inactive": false,
+        "reorderLevel": 10,
+        "name": "பெப்சி",
+        "created_at": 1794380350994,
+        "name_ta": "பெப்சி",
+        "billingPrice": 120,
+        "unit": "pcs"
+      },
+      {
+        "invoicePrice": 100,
+        "id": 8,
+        "updated_at": 1794477478138,
+        "name_en": "Coca-cola",
+        "stock": 50,
+        "inactive": false,
+        "reorderLevel": 10,
+        "name": "கோகோ கோலா",
+        "created_at": 1794380350994,
+        "name_ta": "கோகோ கோலா",
+        "billingPrice": 120,
+        "unit": "pcs"
+      },
+      {
+        "invoicePrice": 100,
+        "id": 9,
+        "updated_at": 1794380350994,
+        "name_en": "Sprite",
+        "stock": 50,
+        "inactive": false,
+        "reorderLevel": 10,
+        "name": "ஸ்ப்ரைட்",
+        "created_at": 1794380350994,
+        "name_ta": "ஸ்ப்ரைட்",
+        "billingPrice": 120,
+        "unit": "pcs"
+      },
+      {
+        "invoicePrice": 100,
+        "id": 10,
+        "updated_at": 1794380350994,
+        "name_en": "Mirinda",
+        "stock": 50,
+        "inactive": false,
+        "reorderLevel": 10,
+        "name": "மிரிண்டா",
+        "created_at": 1794380350994,
+        "name_ta": "மிரிண்டா",
+        "billingPrice": 120,
+        "unit": "pcs"
+      },
+      {
+        "invoicePrice": 120,
+        "id": 11,
+        "updated_at": 1794380350994,
+        "name_en": "Milk",
+        "stock": 40,
+        "inactive": false,
+        "reorderLevel": 10,
+        "name": "பால்",
+        "created_at": 1794380350994,
+        "name_ta": "பால்",
+        "billingPrice": 150,
+        "unit": "pack"
+      },
+      {
+        "invoicePrice": 80,
+        "id": 12,
+        "updated_at": 1794380350994,
+        "name_en": "Juice items",
+        "stock": 60,
+        "inactive": false,
+        "reorderLevel": 15,
+        "name": "ஜூஸ் வகைகள்",
+        "created_at": 1794380350994,
+        "name_ta": "ஜூஸ் வகைகள்",
+        "billingPrice": 100,
+        "unit": "pcs"
+      },
+      {
+        "invoicePrice": 160,
+        "id": 13,
+        "updated_at": 1794380350994,
+        "name_en": "Fruit",
+        "stock": 50,
+        "inactive": false,
+        "reorderLevel": 10,
+        "name": "பழங்கள்",
+        "created_at": 1794380350994,
+        "name_ta": "பழங்கள்",
+        "billingPrice": 200,
+        "unit": "kg"
+      },
+      {
+        "invoicePrice": 120,
+        "id": 14,
+        "updated_at": 1794380350994,
+        "name_en": "Vegetable",
+        "stock": 50,
+        "inactive": false,
+        "reorderLevel": 10,
+        "name": "காய்கறிகள்",
+        "created_at": 1794380350994,
+        "name_ta": "காய்கறிகள்",
+        "billingPrice": 150,
+        "unit": "kg"
+      },
+      {
+        "invoicePrice": 35,
+        "id": 15,
+        "updated_at": 1794380350994,
+        "name_en": "Sweet items",
+        "stock": 80,
+        "inactive": false,
+        "reorderLevel": 20,
+        "name": "இனிப்பு வகைகள்",
+        "created_at": 1794380350994,
+        "name_ta": "இனிப்பு வகைகள்",
+        "billingPrice": 50,
+        "unit": "pcs"
+      },
+      {
+        "invoicePrice": 80,
+        "id": 16,
+        "updated_at": 1794391854273,
+        "name_en": "Biscuits",
+        "stock": 70,
+        "inactive": false,
+        "reorderLevel": 15,
+        "name": "பிஸ்கட்",
+        "created_at": 1794380350994,
+        "name_ta": "பிஸ்கட்",
+        "billingPrice": 100,
+        "unit": "pack"
+      },
+      {
+        "invoicePrice": 50,
+        "id": 17,
+        "updated_at": 1794407950232,
+        "name_en": "Water bottle",
+        "stock": 99,
+        "inactive": false,
+        "reorderLevel": 25,
+        "name": "தண்ணீர் போத்தல்",
+        "created_at": 1794380350994,
+        "name_ta": "தண்ணீர் போத்தல்",
+        "billingPrice": 70,
+        "unit": "pcs"
+      }
+    ],
+    "customers": [
+      {
+        "name": "Raju Vishali",
+        "phone": "",
+        "address": "",
+        "created_at": 1794391786520,
+        "updated_at": 1794477361916,
+        "id": 1
+      }
+    ],
+    "bills": [
+      {
+        "customerName": "Raju Vishali",
+        "customerPhone": "",
+        "customerAddress": "",
+        "items": [
+          {
+            "productId": 17,
+            "name": "தண்ணீர் போத்தல்",
+            "qty": 1,
+            "unit": "pcs",
+            "price": 70,
+            "costPrice": 50
+          }
+        ],
+        "total": 70,
+        "paymentMethod": "cash",
+        "markAsCredit": false,
+        "payments": [
+          {
+            "id": "pay-1794407950214-x3ri",
+            "method": "cash",
+            "amount": 100,
+            "chequeAmount": 100,
+            "chequeDate": "",
+            "chequeNumber": "",
+            "chequeBank": "",
+            "chequeStatus": ""
+          }
+        ],
+        "chequeAmount": 0,
+        "chequeDate": "",
+        "chequeNumber": "",
+        "chequeBank": "",
+        "chequeStatus": "",
+        "receivedAmount": 100,
+        "balanceAmount": 0,
+        "changeAmount": 30,
+        "paymentStatus": "paid",
+        "billStatus": "active",
+        "date": "2026-11-11",
+        "time": "20:09:10",
+        "billNumber": 2,
+        "timestamp": 1794407950226,
+        "id": 2
+      }
+    ],
+    "collectionLogs": [
+      {
+        "customerName": "Raju Vishali",
+        "amount": 100,
+        "method": "cash",
+        "chequeAmount": 100,
+        "chequeDate": "",
+        "chequeNumber": "",
+        "chequeBank": "",
+        "paymentId": "pay-1794407950214-x3ri",
+        "action": "invoice_payment",
+        "beforeReceived": 0,
+        "afterReceived": 100,
+        "billId": 2,
+        "billNumber": 2,
+        "timestamp": 1794407950226,
+        "id": 2
+      }
+    ],
+    "inventoryLogs": [
+      {
+        "billingPrice": 10,
+        "id": 1,
+        "timestamp": 1794380350994,
+        "addedQty": 100,
+        "productId": 1,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "வெற்றிலை",
+        "invoicePrice": 7
+      },
+      {
+        "billingPrice": 50,
+        "id": 2,
+        "timestamp": 1794380350994,
+        "addedQty": 50,
+        "productId": 2,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "புகையிலை",
+        "invoicePrice": 40
+      },
+      {
+        "billingPrice": 150,
+        "id": 3,
+        "timestamp": 1794380350994,
+        "addedQty": 100,
+        "productId": 3,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "சிகரெட்",
+        "invoicePrice": 130
+      },
+      {
+        "billingPrice": 25,
+        "id": 4,
+        "timestamp": 1794380350994,
+        "addedQty": 100,
+        "productId": 4,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "பீடி",
+        "invoicePrice": 20
+      },
+      {
+        "billingPrice": 15,
+        "id": 5,
+        "timestamp": 1794380350994,
+        "addedQty": 100,
+        "productId": 5,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "பூவாக்",
+        "invoicePrice": 10
+      },
+      {
+        "billingPrice": 100,
+        "id": 6,
+        "timestamp": 1794380350994,
+        "addedQty": 50,
+        "productId": 6,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "சோடா",
+        "invoicePrice": 80
+      },
+      {
+        "billingPrice": 120,
+        "id": 7,
+        "timestamp": 1794380350994,
+        "addedQty": 50,
+        "productId": 7,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "பெப்சி",
+        "invoicePrice": 100
+      },
+      {
+        "billingPrice": 120,
+        "id": 8,
+        "timestamp": 1794380350994,
+        "addedQty": 50,
+        "productId": 8,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "கோகோ கோலா",
+        "invoicePrice": 100
+      },
+      {
+        "billingPrice": 120,
+        "id": 9,
+        "timestamp": 1794380350994,
+        "addedQty": 50,
+        "productId": 9,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "ஸ்ப்ரைட்",
+        "invoicePrice": 100
+      },
+      {
+        "billingPrice": 120,
+        "id": 10,
+        "timestamp": 1794380350994,
+        "addedQty": 50,
+        "productId": 10,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "மிரிண்டா",
+        "invoicePrice": 100
+      },
+      {
+        "billingPrice": 150,
+        "id": 11,
+        "timestamp": 1794380350994,
+        "addedQty": 40,
+        "productId": 11,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "பால்",
+        "invoicePrice": 120
+      },
+      {
+        "billingPrice": 100,
+        "id": 12,
+        "timestamp": 1794380350994,
+        "addedQty": 60,
+        "productId": 12,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "ஜூஸ் வகைகள்",
+        "invoicePrice": 80
+      },
+      {
+        "billingPrice": 200,
+        "id": 13,
+        "timestamp": 1794380350994,
+        "addedQty": 50,
+        "productId": 13,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "பழங்கள்",
+        "invoicePrice": 160
+      },
+      {
+        "billingPrice": 150,
+        "id": 14,
+        "timestamp": 1794380350994,
+        "addedQty": 50,
+        "productId": 14,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "காய்கறிகள்",
+        "invoicePrice": 120
+      },
+      {
+        "billingPrice": 50,
+        "id": 15,
+        "timestamp": 1794380350994,
+        "addedQty": 80,
+        "productId": 15,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "இனிப்பு வகைகள்",
+        "invoicePrice": 35
+      },
+      {
+        "billingPrice": 100,
+        "id": 16,
+        "timestamp": 1794380350994,
+        "addedQty": 70,
+        "productId": 16,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "பிஸ்கட்",
+        "invoicePrice": 80
+      },
+      {
+        "billingPrice": 70,
+        "id": 17,
+        "timestamp": 1794380350994,
+        "addedQty": 100,
+        "productId": 17,
+        "action": "initial_stock",
+        "reason": "Initial inventory setup",
+        "productName": "தண்ணீர் போத்தல்",
+        "invoicePrice": 50
+      }
+    ],
+    "expenses": [
+      {
+        "name": "விற்பனை",
+        "amount": 200000,
+        "category": "Other",
+        "date": "2026-11-11",
+        "note": "",
+        "timestamp": 1794407866699,
+        "created_at": 1794407866699,
+        "id": 1
+      }
+    ],
+    "auditLogs": [
+      {
+        "action": "bill_delete",
+        "entity": "bill",
+        "entityId": 3,
+        "details": {
+          "customerName": "Raju Vishali",
+          "total": 120,
+          "returnStock": true
+        },
+        "timestamp": 1794477476998,
+        "id": 7
+      },
+      {
+        "action": "bill_create",
+        "entity": "bill",
+        "details": {
+          "customerName": "Raju Vishali",
+          "total": 120,
+          "receivedAmount": 200,
+          "paymentMethod": "cash",
+          "billNumber": 3
+        },
+        "entityId": 3,
+        "timestamp": 1794476880646,
+        "id": 6
+      },
+      {
+        "action": "bill_create",
+        "entity": "bill",
+        "details": {
+          "customerName": "Raju Vishali",
+          "total": 70,
+          "receivedAmount": 100,
+          "paymentMethod": "cash",
+          "billNumber": 2
+        },
+        "entityId": 2,
+        "timestamp": 1794407950226,
+        "id": 5
+      },
+      {
+        "action": "expense_create",
+        "entity": "expense",
+        "entityId": 1,
+        "details": {
+          "name": "விற்பனை",
+          "amount": 200000,
+          "category": "Other"
+        },
+        "timestamp": 1794407867271,
+        "id": 4
+      },
+      {
+        "action": "backup_export",
+        "entity": "backup",
+        "entityId": null,
+        "details": {
+          "reason": "manual"
+        },
+        "timestamp": 1794391864276,
+        "id": 3
+      },
+      {
+        "action": "bill_delete",
+        "entity": "bill",
+        "entityId": 1,
+        "details": {
+          "customerName": "Raju Vishali",
+          "total": 100,
+          "returnStock": true
+        },
+        "timestamp": 1794391854239,
+        "id": 2
+      },
+      {
+        "action": "bill_create",
+        "entity": "bill",
+        "details": {
+          "customerName": "Raju Vishali",
+          "total": 100,
+          "receivedAmount": 200,
+          "paymentMethod": "cash",
+          "billNumber": 1
+        },
+        "entityId": 1,
+        "timestamp": 1794391786500,
+        "id": 1
+      }
+    ]
+  }
+}

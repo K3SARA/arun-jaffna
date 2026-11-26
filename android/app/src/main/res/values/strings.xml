@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">மகேஸ்வானி வெற்றிலை</string>
+    <string name="title_activity_main">Mageshvani Vetrilai</string>
+    <string name="package_name">com.mageshvani.vetrilai</string>
+    <string name="custom_url_scheme">com.mageshvani.vetrilai</string>
+</resources>
